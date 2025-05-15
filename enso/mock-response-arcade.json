@@ -1,0 +1,2061 @@
+{
+  "items": [
+    {
+      "fully_qualified_name": "CodeSandbox.CreateStaticMatplotlibChart@1.0.0",
+      "qualified_name": "CodeSandbox.CreateStaticMatplotlibChart",
+      "name": "CreateStaticMatplotlibChart",
+      "description": "Run the provided Python code to generate a static matplotlib chart.\nThe resulting chart is returned as a base64 encoded image.",
+      "toolkit": {
+        "name": "CodeSandbox",
+        "description": "LLM tools for running code in a sandbox",
+        "version": "1.0.0"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "code",
+            "required": true,
+            "description": "The Python code to run",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "A dictionary with the following keys: base64_image, logs, error",
+        "value_schema": {
+          "val_type": "json"
+        }
+      },
+      "requirements": {
+        "secrets": [
+          {
+            "key": "e2b_api_key"
+          }
+        ]
+      }
+    },
+    {
+      "fully_qualified_name": "CodeSandbox.RunCode@1.0.0",
+      "qualified_name": "CodeSandbox.RunCode",
+      "name": "RunCode",
+      "description": "Run code in a sandbox and return the output.",
+      "toolkit": {
+        "name": "CodeSandbox",
+        "description": "LLM tools for running code in a sandbox",
+        "version": "1.0.0"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "code",
+            "required": true,
+            "description": "The code to run",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "language",
+            "required": false,
+            "description": "The language of the code",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "python",
+                "js",
+                "r",
+                "java",
+                "bash"
+              ]
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "The sandbox execution as a JSON string",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "secrets": [
+          {
+            "key": "e2b_api_key"
+          }
+        ]
+      }
+    },
+    {
+      "fully_qualified_name": "Demo.lorem@1.0.0",
+      "qualified_name": "Demo.lorem",
+      "name": "lorem",
+      "description": "Returns a specified number of words from Lorem Ipsum text",
+      "toolkit": {
+        "name": "Demo",
+        "version": "1.0.0"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "wordCount",
+            "required": true,
+            "description": "The number of words to return",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "value_schema": {
+          "val_type": "string"
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Dropbox.DownloadFile@0.1.1",
+      "qualified_name": "Dropbox.DownloadFile",
+      "name": "DownloadFile",
+      "description": "Downloads the specified file.\n\nNote: either one of `file_path` or `file_id` must be provided.",
+      "toolkit": {
+        "name": "Dropbox",
+        "description": "Arcade tools designed for LLMs to interact with Dropbox",
+        "version": "0.1.1"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "file_path",
+            "required": false,
+            "description": "The path of the file to download. E.g. '/AcmeInc/Reports/Q1_2025.txt'. Defaults to None.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "file_id",
+            "required": false,
+            "description": "The ID of the file to download. E.g. 'id:a4ayc_80_OEAAAAAAAAAYa'. Defaults to None.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "Contents of the specified file",
+        "value_schema": {
+          "val_type": "json"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "dropbox",
+          "provider_type": "oauth2",
+          "oauth2": {
+            "scopes": [
+              "files.content.read"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Dropbox.ListItemsInFolder@0.1.1",
+      "qualified_name": "Dropbox.ListItemsInFolder",
+      "name": "ListItemsInFolder",
+      "description": "Provides a dictionary containing the list of items in the specified folder path.\n\nNote 1: when paginating, it is not necessary to provide any other argument besides the cursor.\nNote 2: when paginating, any given item (file or folder) may be returned in multiple pages.",
+      "toolkit": {
+        "name": "Dropbox",
+        "description": "Arcade tools designed for LLMs to interact with Dropbox",
+        "version": "0.1.1"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "folder_path",
+            "required": false,
+            "description": "The path to the folder to list the contents of. E.g. '/AcmeInc/Reports'. Defaults to an empty string (list items in the Dropbox root folder).",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "description": "The maximum number of items to return. Defaults to 100. Maximum allowed is 2000.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "description": "The cursor token for the next page of results. Defaults to None (returns the first page of results).",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "Dictionary containing the list of files and folders in the specified folder path",
+        "value_schema": {
+          "val_type": "json"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "dropbox",
+          "provider_type": "oauth2",
+          "oauth2": {
+            "scopes": [
+              "files.metadata.read"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Dropbox.SearchFilesAndFolders@0.1.1",
+      "qualified_name": "Dropbox.SearchFilesAndFolders",
+      "name": "SearchFilesAndFolders",
+      "description": "Returns a list of items in the specified folder path matching the search criteria.\n\nNote 1: the Dropbox API will return up to 10,000 (ten thousand) items cumulatively across\nmultiple pagination requests using the cursor token.\nNote 2: when paginating, it is not necessary to provide any other argument besides the cursor.\nNote 3: when paginating, any given item (file or folder) may be returned in multiple pages.",
+      "toolkit": {
+        "name": "Dropbox",
+        "description": "Arcade tools designed for LLMs to interact with Dropbox",
+        "version": "0.1.1"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "keywords",
+            "required": true,
+            "description": "The keywords to search for. E.g. 'quarterly report'. Maximum length allowed by the Dropbox API is 1000 characters. ",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "search_in_folder_path",
+            "required": false,
+            "description": "Restricts the search to the specified folder path. E.g. '/AcmeInc/Reports'. Defaults to None (search in the entire Dropbox).",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "filter_by_category",
+            "required": false,
+            "description": "Restricts the search to the specified category(ies) of items. Provide None, one or multiple, if needed. Defaults to None (returns all categories).",
+            "value_schema": {
+              "val_type": "array",
+              "inner_val_type": "string",
+              "enum": [
+                "image",
+                "document",
+                "pdf",
+                "spreadsheet",
+                "presentation",
+                "audio",
+                "video",
+                "folder",
+                "paper"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "description": "The maximum number of items to return. Defaults to 100. Maximum allowed is 1000.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "cursor",
+            "required": false,
+            "description": "The cursor token for the next page of results. Defaults to None (first page of results).",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "List of items in the specified folder path matching the search criteria",
+        "value_schema": {
+          "val_type": "json"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "dropbox",
+          "provider_type": "oauth2",
+          "oauth2": {
+            "scopes": [
+              "files.metadata.read"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.CountStargazers@0.1.10",
+      "qualified_name": "Github.CountStargazers",
+      "name": "CountStargazers",
+      "description": "Count the number of stargazers (stars) for a GitHub repository.\nFor example, to count the number of stars for microsoft/vscode, you would use:\n```\ncount_stargazers(owner=\"microsoft\", name=\"vscode\")\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The owner of the repository",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "name",
+            "required": true,
+            "description": "The name of the repository",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "The number of stargazers (stars) for the specified repository",
+        "value_schema": {
+          "val_type": "integer"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.CreateIssue@0.1.10",
+      "qualified_name": "Github.CreateIssue",
+      "name": "CreateIssue",
+      "description": "Create an issue in a GitHub repository.\n\nExample:\n```\ncreate_issue(\n    owner=\"octocat\",\n    repo=\"Hello-World\",\n    title=\"Found a bug\",\n    body=\"I'm having a problem with this.\",\n    assignees=[\"octocat\"],\n    milestone=1,\n    labels=[\"bug\"],\n)\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "title",
+            "required": true,
+            "description": "The title of the issue.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "body",
+            "required": false,
+            "description": "The contents of the issue.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "assignees",
+            "required": false,
+            "description": "Logins for Users to assign to this issue.",
+            "value_schema": {
+              "val_type": "array",
+              "inner_val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "milestone",
+            "required": false,
+            "description": "The number of the milestone to associate this issue with.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "labels",
+            "required": false,
+            "description": "Labels to associate with this issue.",
+            "value_schema": {
+              "val_type": "array",
+              "inner_val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_extra_data",
+            "required": false,
+            "description": "If true, return all the data available about the pull requests. This is a large payload and may impact performance - use with caution.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "A JSON string containing the created issue's details, including id, url, title, body, state, html_url, creation and update timestamps, user, assignees, and labels. If include_extra_data is True, returns all available data about the issue.",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.CreateIssueComment@0.1.10",
+      "qualified_name": "Github.CreateIssueComment",
+      "name": "CreateIssueComment",
+      "description": "Create a comment on an issue in a GitHub repository.\n\nExample:\n```\ncreate_issue_comment(owner=\"octocat\", repo=\"Hello-World\", issue_number=1347, body=\"Me too\")\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "issue_number",
+            "required": true,
+            "description": "The number that identifies the issue.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "body",
+            "required": true,
+            "description": "The contents of the comment.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_extra_data",
+            "required": false,
+            "description": "If true, return all the data available about the pull requests. This is a large payload and may impact performance - use with caution.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "A JSON string containing the created comment's details, including id, url, body, user, and creation and update timestamps. If include_extra_data is True, returns all available data about the comment.",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.CreateReplyForReviewComment@0.1.10",
+      "qualified_name": "Github.CreateReplyForReviewComment",
+      "name": "CreateReplyForReviewComment",
+      "description": "Create a reply to a review comment for a pull request.\n\nExample:\n```\ncreate_reply_for_review_comment(\n    owner=\"octocat\",\n    repo=\"Hello-World\",\n    pull_number=1347,\n    comment_id=42,\n    body=\"Looks good to me!\",\n)\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "pull_number",
+            "required": true,
+            "description": "The number that identifies the pull request.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "comment_id",
+            "required": true,
+            "description": "The unique identifier of the comment.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "body",
+            "required": true,
+            "description": "The text of the review comment.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "JSON string containing details of the created reply comment",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.CreateReviewComment@0.1.10",
+      "qualified_name": "Github.CreateReviewComment",
+      "name": "CreateReviewComment",
+      "description": "Create a review comment for a pull request in a GitHub repository.\n\nIf the subject_type is not 'file', then the start_line and end_line parameters are required.\nIf the subject_type is 'file', then the start_line and end_line parameters are ignored.\nIf the commit_id is not provided, the latest commit SHA of the PR's base branch will be used.\n\nExample:\n```\ncreate_review_comment(\n    owner=\"octocat\",\n    repo=\"Hello-World\",\n    pull_number=1347,\n    body=\"Great stuff!\",\n    commit_id=\"6dcb09b5b57875f334f61aebed695e2e4193db5e\",\n    path=\"file1.txt\",\n    line=2,\n    side=\"RIGHT\"\n)\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "pull_number",
+            "required": true,
+            "description": "The number that identifies the pull request.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "body",
+            "required": true,
+            "description": "The text of the review comment.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "path",
+            "required": true,
+            "description": "The relative path to the file that necessitates a comment.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "commit_id",
+            "required": false,
+            "description": "The SHA of the commit needing a comment. If not provided, the latest commit SHA of the PR's base branch will be used.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "start_line",
+            "required": false,
+            "description": "The start line of the range of lines in the pull request diff that the comment applies to. Required unless 'subject_type' is 'file'.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "end_line",
+            "required": false,
+            "description": "The end line of the range of lines in the pull request diff that the comment applies to. Required unless 'subject_type' is 'file'.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "side",
+            "required": false,
+            "description": "The side of the diff that the pull request's changes appear on. Use LEFT for deletions that appear in red. Use RIGHT for additions that appear in green or unchanged lines that appear in white and are shown for context",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "LEFT",
+                "RIGHT"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "start_side",
+            "required": false,
+            "description": "The starting side of the diff that the comment applies to.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "subject_type",
+            "required": false,
+            "description": "The type of subject that the comment applies to. Can be one of: file, hunk, or line.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "file",
+                "line"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_extra_data",
+            "required": false,
+            "description": "If true, return all the data available about the review comment. This is a large payload and may impact performance - use with caution.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "JSON string containing details of the created review comment",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.GetPullRequest@0.1.10",
+      "qualified_name": "Github.GetPullRequest",
+      "name": "GetPullRequest",
+      "description": "Get details of a pull request in a GitHub repository.\n\nExample:\n```\nget_pull_request(owner=\"octocat\", repo=\"Hello-World\", pull_number=1347)\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "pull_number",
+            "required": true,
+            "description": "The number that identifies the pull request.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_diff_content",
+            "required": false,
+            "description": "If true, return the diff content of the pull request.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_extra_data",
+            "required": false,
+            "description": "If true, return all the data available about the pull requests. This is a large payload and may impact performance - use with caution.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "JSON string containing details of the specified pull request, optionally including diff content",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.GetRepository@0.1.10",
+      "qualified_name": "Github.GetRepository",
+      "name": "GetRepository",
+      "description": "Get a repository.\n\nRetrieves detailed information about a repository using the GitHub API.\n\nExample:\n```\nget_repository(owner=\"octocat\", repo=\"Hello-World\")\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_extra_data",
+            "required": false,
+            "description": "If true, return all the data available about the repository. This is a large payload and may impact performance - use with caution.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "A dictionary containing repository details such as name, full_name, html_url, description, clone_url, private status, creation/update/push timestamps, and star/watcher/fork counts",
+        "value_schema": {
+          "val_type": "json"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.ListOrgRepositories@0.1.10",
+      "qualified_name": "Github.ListOrgRepositories",
+      "name": "ListOrgRepositories",
+      "description": "List repositories for the specified organization.",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "org",
+            "required": true,
+            "description": "The organization name. The name is not case sensitive",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo_type",
+            "required": false,
+            "description": "The types of repositories you want returned.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "all",
+                "public",
+                "private",
+                "forks",
+                "sources",
+                "member"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "description": "The property to sort the results by",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "created",
+                "updated",
+                "pushed",
+                "full_name"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "sort_direction",
+            "required": false,
+            "description": "The order to sort by",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "per_page",
+            "required": false,
+            "description": "The number of results per page",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "page",
+            "required": false,
+            "description": "The page number of the results to fetch",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_extra_data",
+            "required": false,
+            "description": "If true, return all the data available about the repositories. This is a large payload and may impact performance - use with caution.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "A dictionary with key 'repositories' containing a list of repositories, each with details such as name, full_name, html_url, description, clone_url, private status, creation/update/push timestamps, and star/watcher/fork counts",
+        "value_schema": {
+          "val_type": "json"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.ListPullRequestCommits@0.1.10",
+      "qualified_name": "Github.ListPullRequestCommits",
+      "name": "ListPullRequestCommits",
+      "description": "List commits (from oldest to newest) on a pull request in a GitHub repository.\n\nExample:\n```\nlist_pull_request_commits(owner=\"octocat\", repo=\"Hello-World\", pull_number=1347)\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "pull_number",
+            "required": true,
+            "description": "The number that identifies the pull request.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "per_page",
+            "required": false,
+            "description": "The number of results per page (max 100).",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "page",
+            "required": false,
+            "description": "The page number of the results to fetch.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_extra_data",
+            "required": false,
+            "description": "If true, return all the data available about the pull requests. This is a large payload and may impact performance - use with caution.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "JSON string containing a list of commits for the specified pull request",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.ListPullRequests@0.1.10",
+      "qualified_name": "Github.ListPullRequests",
+      "name": "ListPullRequests",
+      "description": "List pull requests in a GitHub repository.\n\nExample:\n```\nlist_pull_requests(owner=\"octocat\", repo=\"Hello-World\", state=PRState.OPEN, sort=PRSort.UPDATED)\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "state",
+            "required": false,
+            "description": "The state of the pull requests to return.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "open",
+                "closed",
+                "all"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "head",
+            "required": false,
+            "description": "Filter pulls by head user or head organization and branch name in the format of user:ref-name or organization:ref-name.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "base",
+            "required": false,
+            "description": "Filter pulls by base branch name.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "description": "The property to sort the results by.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "created",
+                "updated",
+                "popularity",
+                "long-running"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "direction",
+            "required": false,
+            "description": "The direction of the sort.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "per_page",
+            "required": false,
+            "description": "The number of results per page (max 100).",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "page",
+            "required": false,
+            "description": "The page number of the results to fetch.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_extra_data",
+            "required": false,
+            "description": "If true, return all the data available about the pull requests. This is a large payload and may impact performance - use with caution.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "JSON string containing a list of pull requests with their details",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.ListRepositoryActivities@0.1.10",
+      "qualified_name": "Github.ListRepositoryActivities",
+      "name": "ListRepositoryActivities",
+      "description": "List repository activities.\n\nRetrieves a detailed history of changes to a repository, such as pushes, merges,\nforce pushes, and branch changes, and associates these changes with commits and users.\n\nExample:\n```\nlist_repository_activities(\n    owner=\"octocat\",\n    repo=\"Hello-World\",\n    per_page=10,\n    activity_type=\"force_push\"\n)\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "direction",
+            "required": false,
+            "description": "The direction to sort the results by.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "per_page",
+            "required": false,
+            "description": "The number of results per page (max 100).",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "before",
+            "required": false,
+            "description": "A cursor (unique ID, e.g., a SHA of a commit) to search for results before this cursor.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "after",
+            "required": false,
+            "description": "A cursor (unique ID, e.g., a SHA of a commit) to search for results after this cursor.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "ref",
+            "required": false,
+            "description": "The Git reference for the activities you want to list. The ref for a branch can be formatted either as refs/heads/BRANCH_NAME or BRANCH_NAME, where BRANCH_NAME is the name of your branch.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "actor",
+            "required": false,
+            "description": "The GitHub username to filter by the actor who performed the activity.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "time_period",
+            "required": false,
+            "description": "The time period to filter by.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "day",
+                "week",
+                "month",
+                "quarter",
+                "year"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "activity_type",
+            "required": false,
+            "description": "The activity type to filter by.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "push",
+                "force_push",
+                "branch_creation",
+                "branch_deletion",
+                "pr_merge",
+                "merge_queue_merge"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_extra_data",
+            "required": false,
+            "description": "If true, return all the data available about the repository activities. This is a large payload and may impact performance - use with caution.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "A JSON string containing a dictionary with key 'activities', which is a list of repository activities. Each activity includes id, node_id, before and after states, ref, timestamp, activity_type, and actor information",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.ListReviewCommentsInARepository@0.1.10",
+      "qualified_name": "Github.ListReviewCommentsInARepository",
+      "name": "ListReviewCommentsInARepository",
+      "description": "List review comments in a GitHub repository.\n\nExample:\n```\nlist_review_comments(owner=\"octocat\", repo=\"Hello-World\", sort=\"created\", direction=\"asc\")\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "description": "Can be one of: created, updated.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "created",
+                "updated"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "direction",
+            "required": false,
+            "description": "The direction to sort results. Ignored without sort parameter. Can be one of: asc, desc.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "since",
+            "required": false,
+            "description": "Only show results that were last updated after the given time. This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "per_page",
+            "required": false,
+            "description": "The number of results per page (max 100).",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "page",
+            "required": false,
+            "description": "The page number of the results to fetch.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_extra_data",
+            "required": false,
+            "description": "If true, return all the data available about the review comments. This is a large payload and may impact performance - use with caution.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "A JSON string containing a dictionary with key 'review_comments', which is a list of review comments. Each comment includes id, url, diff_hunk, path, position details, commit information, user, body, timestamps, and related URLs",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.ListReviewCommentsOnPullRequest@0.1.10",
+      "qualified_name": "Github.ListReviewCommentsOnPullRequest",
+      "name": "ListReviewCommentsOnPullRequest",
+      "description": "List review comments on a pull request in a GitHub repository.\n\nExample:\n```\nlist_review_comments_on_pull_request(owner=\"octocat\", repo=\"Hello-World\", pull_number=1347)\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "pull_number",
+            "required": true,
+            "description": "The number that identifies the pull request.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "description": "The property to sort the results by. Can be one of: created, updated.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "created",
+                "updated"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "direction",
+            "required": false,
+            "description": "The direction to sort results. Can be one of: asc, desc.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "since",
+            "required": false,
+            "description": "Only show results that were last updated after the given time. This is a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "per_page",
+            "required": false,
+            "description": "The number of results per page (max 100).",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "page",
+            "required": false,
+            "description": "The page number of the results to fetch.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "include_extra_data",
+            "required": false,
+            "description": "If true, return all the data available about the review comments. This is a large payload and may impact performance - use with caution.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "JSON string containing a list of review comments for the specified pull request",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.ListStargazers@0.1.10",
+      "qualified_name": "Github.ListStargazers",
+      "name": "ListStargazers",
+      "description": "List the stargazers for a GitHub repository.",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The owner of the repository",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "description": "The maximum number of stargazers to return. If not provided, all stargazers will be returned.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "A dictionary containing the stargazers for the specified repository",
+        "value_schema": {
+          "val_type": "json"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.SetStarred@0.1.10",
+      "qualified_name": "Github.SetStarred",
+      "name": "SetStarred",
+      "description": "Star or un-star a GitHub repository.\nFor example, to star microsoft/vscode, you would use:\n```\nset_starred(owner=\"microsoft\", name=\"vscode\", starred=True)\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The owner of the repository",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "name",
+            "required": true,
+            "description": "The name of the repository",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "starred",
+            "required": false,
+            "description": "Whether to star the repository or not",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "A message indicating whether the repository was successfully starred or unstarred",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Github.UpdatePullRequest@0.1.10",
+      "qualified_name": "Github.UpdatePullRequest",
+      "name": "UpdatePullRequest",
+      "description": "Update a pull request in a GitHub repository.\n\nExample:\n```\nupdate_pull_request(\n    owner=\"octocat\",\n    repo=\"Hello-World\",\n    pull_number=1347,\n    title=\"new title\",\n    body=\"updated body\",\n)\n```",
+      "toolkit": {
+        "name": "Github",
+        "description": "LLM tools for interacting with Github",
+        "version": "0.1.10"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "owner",
+            "required": true,
+            "description": "The account owner of the repository. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "repo",
+            "required": true,
+            "description": "The name of the repository without the .git extension. The name is not case sensitive.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "pull_number",
+            "required": true,
+            "description": "The number that identifies the pull request.",
+            "value_schema": {
+              "val_type": "integer"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "title",
+            "required": false,
+            "description": "The title of the pull request.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "body",
+            "required": false,
+            "description": "The contents of the pull request.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "state",
+            "required": false,
+            "description": "State of this Pull Request. Either open or closed.",
+            "value_schema": {
+              "val_type": "string",
+              "enum": [
+                "open",
+                "closed",
+                "all"
+              ]
+            },
+            "inferrable": true
+          },
+          {
+            "name": "base",
+            "required": false,
+            "description": "The name of the branch you want your changes pulled into.",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "maintainer_can_modify",
+            "required": false,
+            "description": "Indicates whether maintainers can modify the pull request.",
+            "value_schema": {
+              "val_type": "boolean"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "JSON string containing updated information about the pull request",
+        "value_schema": {
+          "val_type": "string"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "github",
+          "provider_type": "oauth2",
+          "oauth2": {}
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Google.ChangeEmailLabels@1.2.1",
+      "qualified_name": "Google.ChangeEmailLabels",
+      "name": "ChangeEmailLabels",
+      "description": "Add and remove labels from an email using the Gmail API.",
+      "toolkit": {
+        "name": "Google",
+        "description": "Arcade.dev LLM tools for Google Workspace",
+        "version": "1.2.1"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "email_id",
+            "required": true,
+            "description": "The ID of the email to modify labels for",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "labels_to_add",
+            "required": true,
+            "description": "List of label names to add",
+            "value_schema": {
+              "val_type": "array",
+              "inner_val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "labels_to_remove",
+            "required": true,
+            "description": "List of label names to remove",
+            "value_schema": {
+              "val_type": "array",
+              "inner_val_type": "string"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "List of labels that were added, removed, and not found",
+        "value_schema": {
+          "val_type": "json"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "google",
+          "provider_type": "oauth2",
+          "oauth2": {
+            "scopes": [
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Google.CreateBlankDocument@1.2.1",
+      "qualified_name": "Google.CreateBlankDocument",
+      "name": "CreateBlankDocument",
+      "description": "Create a blank Google Docs document with the specified title.",
+      "toolkit": {
+        "name": "Google",
+        "description": "Arcade.dev LLM tools for Google Workspace",
+        "version": "1.2.1"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "title",
+            "required": true,
+            "description": "The title of the blank document to create",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "The created document's title, documentId, and documentUrl in a dictionary",
+        "value_schema": {
+          "val_type": "json"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "google",
+          "provider_type": "oauth2",
+          "oauth2": {
+            "scopes": [
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "fully_qualified_name": "Google.CreateContact@1.2.1",
+      "qualified_name": "Google.CreateContact",
+      "name": "CreateContact",
+      "description": "Create a new contact record in Google Contacts.\n\nExamples:\n```\ncreate_contact(given_name=\"Alice\")\ncreate_contact(given_name=\"Alice\", family_name=\"Smith\")\ncreate_contact(given_name=\"Alice\", email=\"alice@example.com\")\n```",
+      "toolkit": {
+        "name": "Google",
+        "description": "Arcade.dev LLM tools for Google Workspace",
+        "version": "1.2.1"
+      },
+      "input": {
+        "parameters": [
+          {
+            "name": "given_name",
+            "required": true,
+            "description": "The given name of the contact",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "family_name",
+            "required": false,
+            "description": "The optional family name of the contact",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          },
+          {
+            "name": "email",
+            "required": false,
+            "description": "The optional email address of the contact",
+            "value_schema": {
+              "val_type": "string"
+            },
+            "inferrable": true
+          }
+        ]
+      },
+      "output": {
+        "available_modes": [
+          "value",
+          "error"
+        ],
+        "description": "A dictionary containing the details of the created contact",
+        "value_schema": {
+          "val_type": "json"
+        }
+      },
+      "requirements": {
+        "authorization": {
+          "provider_id": "google",
+          "provider_type": "oauth2",
+          "oauth2": {
+            "scopes": [
+              "https://www.googleapis.com/auth/contacts"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "limit": 25,
+  "offset": 0,
+  "page_count": 25,
+  "total_count": 192
+}
