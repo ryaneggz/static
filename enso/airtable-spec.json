@@ -1,0 +1,168 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Airtable Tools",
+    "description": "Unified webhook endpoint with tool-specific actions based on `event`",
+    "version": "v1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://n8n.enso.sh"
+    }
+  ],
+  "paths": {
+    "/webhook/airtable": {
+      "post": {
+        "operationId": "airtable_list_bases",
+        "deprecated": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "event": {
+                    "type": "string",
+                    "enum": [
+                      "airtable_list_bases"
+                    ]
+                  },
+                  "data": {
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "event",
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of bases"
+          }
+        }
+      }
+    },
+    "/webhook/airtable#schema": {
+      "post": {
+        "operationId": "airtable_get_base_schema",
+        "deprecated": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "event": {
+                    "type": "string",
+                    "enum": [
+                      "airtable_get_base_schema"
+                    ]
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "baseId": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "baseId"
+                    ]
+                  }
+                },
+                "required": [
+                  "event",
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Schema retrieved"
+          }
+        }
+      }
+    },
+    "/webhook/airtable#search": {
+      "post": {
+        "operationId": "airtable_search_records",
+        "deprecated": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "event": {
+                    "type": "string",
+                    "enum": [
+                      "airtable_search_records"
+                    ]
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "baseId": {
+                        "type": "string"
+                      },
+                      "tableId": {
+                        "type": "string"
+                      },
+                      "filterByFormula": {
+                        "type": "string"
+                      },
+                      "outputFields": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "List of field names to include in the response"
+                      },
+                      "sort": {
+                        "type": "object",
+                        "properties": {
+                          "field": {
+                            "type": "string"
+                          },
+                          "direction": {
+                            "type": "string",
+                            "enum": [
+                              "ASC",
+                              "DESC"
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "baseId",
+                      "tableId"
+                    ]
+                  }
+                },
+                "required": [
+                  "event",
+                  "data"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Matching records returned"
+          }
+        }
+      }
+    }
+  }
+}
